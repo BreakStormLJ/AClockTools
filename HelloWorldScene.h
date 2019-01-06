@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+USING_NS_CC;
+
 class HelloWorld : public cocos2d::Layer
 {
 public:
@@ -15,6 +17,14 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+public:
+	//node对象的update方法（每一帧都刷新this->scheduleUpdate();）
+	virtual void update(float delta);
+
+private:
+	Sprite* bgSprite1;
+	Sprite* bgSprite2;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
