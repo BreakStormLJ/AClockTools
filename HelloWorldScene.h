@@ -3,18 +3,19 @@
 
 #include "cocos2d.h"
 
-class HelloWorld : public cocos2d::Layer
+class HelloWorld:public cocos2d::Layer
 {
 public:
-    static cocos2d::Scene* createScene();
+	
+	static cocos2d::Scene* createScene();
+	virtual bool init();
+	//void createLabel(cocos2d::String str,int height);
 
-    virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
-    // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+	void menuCloseCallback(cocos2d::Ref* pSender);
+	
+
+	CREATE_FUNC(HelloWorld);
+
 };
 
 #endif // __HELLOWORLD_SCENE_H__
