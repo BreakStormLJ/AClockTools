@@ -20,57 +20,55 @@ Scene* HelloWorld::createScene()
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
-    if ( !Layer::init() )
-    {
-        return false;
-    }
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	//////////////////////////////
+	// 1. super init first
+	if (!Layer::init())
+	{
+		return false;
+	}
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
-    
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
+	/////////////////////////////
+	// 2. add a menu item with "X" image, which is clicked to quit the program
+	//    you may modify it.
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+	// add a "close" icon to exit the progress. it's an autorelease object
+	auto closeItem = MenuItemImage::create(
+		"CloseNormal.png",
+		"CloseSelected.png",
+		CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
-    /////////////////////////////
-    // 3. add your codes below...
+	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
+		origin.y + closeItem->getContentSize().height / 2));
 
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+	// create menu, it's an autorelease object
+	auto menu = Menu::create(closeItem, NULL);
+	menu->setPosition(Vec2::ZERO);
+	this->addChild(menu, 1);
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
+	auto sprit1 = Sprite::create("red.png");
+	sprit1->setPosition(Vec2(origin.x + visibleSize.width / 2 - 200,
+		origin.y + visibleSize.height - sprit1->getContentSize().height - 250));
+	sprit1->setAnchorPoint(Vec2(0, 0));
+	this->addChild(sprit1, 0);
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+	auto sprit2 = Sprite::create("green.png");
+	sprit2->setPosition(Vec2(origin.x + visibleSize.width / 2 ,
+		origin.y + sprit2->getContentSize().height - 100));
+	sprit2->setAnchorPoint(Vec2(0,0));
+	sprit2->setName("redImg");
+	this->addChild(sprit2, 0);
 
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+	//BlendFunc blend = { GL_ONE, GL_ONE };
+	//BlendFunc blend = { GL_SRC_ALPHA, GL_ONE };
+	//BlendFunc blend = { GL_ONE, GL_ZERO }; 
+	//BlendFunc blend = { GL_ZERO, GL_ONE };
+	BlendFunc blend = { GL_DST_COLOR, GL_ONE };
+	sprit2->setBlendFunc(blend);
 
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+	//sthis->removeAllChildren();
     
     return true;
 }
@@ -84,3 +82,10 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     exit(0);
 #endif
 }
+
+
+/*  混合方式     解释       因子值
+ *	 GL_ONE   全部不用     (0,0,0,0)
+ */
+
+
