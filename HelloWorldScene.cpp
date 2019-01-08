@@ -3,11 +3,22 @@
 
 USING_NS_CC;
 
-Scene* HelloWorld::createScene(){
-	auto scene = Scene::create();
+HelloWorld* HelloWorld::create(){
+	HelloWorld * pRet = new HelloWorld();
+	if (pRet && pRet->init())
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRet);
+		return NULL;
+	}
+	/*auto scene = Scene::create();
 	auto layer = HelloWorld::create();
 	scene->addChild(layer);
-	return scene;
+	return scene;*/
 }
 
 bool HelloWorld::init(){
@@ -64,7 +75,7 @@ bool HelloWorld::init(){
 }
 
 void HelloWorld::menuCloseCallback(Ref* pSender){
-	CCLOG("I want to close the window!");
+	//CCLOG("I want to close the window!");
 
-	//Director::getInstance()->end();
+	Director::getInstance()->end();
 }

@@ -78,7 +78,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    //auto scene = HelloWorld::createScene();
+	auto scene = Scene::create();
+	HelloWorld * layer = HelloWorld::create();
+	scene->addChild(layer);
 
     // run
     director->runWithScene(scene);
